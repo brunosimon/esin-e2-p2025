@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Cours 02 - JavaScript Modules</title>
+        <meta name="description" content="">
+        <meta name="author" content="Bruno Simon">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="../src/reveal.js/css/reveal.css">
+        <link rel="stylesheet" href="../src/reveal.js/css/theme/orange.css" id="theme">
+        <!-- <link rel="stylesheet" href="../src/reveal.js/lib/css/highlight/railscasts.css"> -->
+        <link rel="stylesheet" href="../src/reveal.js/lib/css/highlight/github.css">
+        <link rel="stylesheet" href="../src/custom/style.css">
+        <script>
+            document.write( '<link rel="stylesheet" href="../src/reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!--[if lt IE 9]>
+            <script src="../src/reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <!-- Code steps start -->
+        <link rel="stylesheet" href="../src/code-steps/prism-tomorrow.css">
+        <link rel="stylesheet" href="../src/code-steps/style.css">
+        <!-- Code steps end -->
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h1>Développement web</h1>
+                    <h3>Cours 02</h3>
+                    <ul>
+                        <li>site : <a target="_blank" href="http://bruno-simon.com/esin/e2-p2025/">http://bruno-simon.com/esin/e2-p2025/</a></li>
+                        <li>contact : <a target="_blank" href="mailto:bruno.simon1@exterieur.groupe-igs.fr">bruno.simon1@exterieur.groupe-igs.fr</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>JavaScript Modules</h1>
+                </section>
+
+                <section>
+                    <p>Jusqu'à présent, nous écrivions tout notre code dans un seul fichier JavaScript (spaghetti)</p>
+                    <p>Cela pose plusieurs problèmes</p>
+                </section>
+                
+                <section>
+                    <ul>
+                        <li>Difficile de trouver ce qu'on cherche</li>
+                        <li>Difficile de ré-utiliser certaines parties</li>
+                        <li>Il faut s'assurer que les variables ne rentrent pas en conflit</li>
+                        <li>Difficile de travailler avec d'autres développeurs (surtout avec git)</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p>Il existe plusieurs techniques pour organiser notre code</p>
+                    <p>Dans un premier temps, l'idéal serait de pouvoir séparer notre code dans plusieurs fichiers</p>
+                </section>
+
+                <section>
+                    <p>Nous allons utiliser les <span class="hl">modules</span></p>
+                </section>
+
+                <section>
+                    <p>Les navigateurs moderne supportent les modules (<a href="https://caniuse.com/?search=import" target="_blank">Can I Use</a>)</p>
+                    <p>Webpack supporte aussi les modules et notre code sera automatiquement transpilé en une version non-module pour maximiser la compatibilité</p>
+                    <p>Nous allons utiliser les modules avec Webpack et la syntaxe est sensiblement la même</p>
+                </section>
+
+                <section>
+                    <p>Dans le dossier <span class="hl">src/</span>, créez un fichier <span class="hl">test.js</span></p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+console.log('Hey')
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Dans <span class="hl">src/script.js</span> "importez" le fichier</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+import './test.js'
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Et ça fonctionne !</p>
+                    <p>⚠️ Mais les modules sont censés exporter quelque chose et, en natif, ce code pourrait ne pas fonctionner sur certains navigateurs</p>
+                </section>
+
+                <section>
+                    <p>Nous pouvons commencer par exporter une chaîne de caractères</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+export default 'Hello modules'
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Pour ensuite l'importer, mais cette fois-ci dans une variable</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+import test from './test.js'
+
+console.log(test)
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Le mot clé <span class="hl">default</span> indique que c'est ce qui est exporté par défaut</p>
+                    <p>Nous verrons plus tard pour exporter plusieurs éléments depuis un même fichier</p>
+                </section>
+
+                <section>
+                    <p>Nous pouvons exporter une fonction</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+export default () =>
+{
+    console.log('Hello modules')
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Et l'importer</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+import test from './test.js'
+
+test()
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Nous pouvons exporter un objet</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+export default {
+    hello: 'modules'
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Et l'importer</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+import test from './test.js'
+
+console.log(test)
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>L'export peut avoir lieu plus tard dans le fichier</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+const somethingToExport = {
+    hello: 'modules'
+}
+
+export default somethingToExport
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Un même fichier peut exporter plusieurs éléments</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+const oneThing = {
+    hello: 'modules'
+}
+
+const anotherThing = () =>
+{
+    console.log('Hi!')
+}
+
+export { oneThing, anotherThing }
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Pour les importer, il faut utiliser les exactes mêmes noms</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+import { oneThing, anotherThing } from './test.js'
+
+console.log(oneThing)
+anotherThing()
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Cela permet aussi de n'importer que ce dont on a besoin</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+import { oneThing } from './test.js'
+
+console.log(oneThing)
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>☝️</p>
+                    <p>Nous n'allons pas utiliser cette dernière features car nous nous retrouverions avec beaucoup de code dans un même fichier</p>
+                    <p>En revanche, plus tard, nous utiliserons des librairies et nous pourrons importer que certains éléments de ces librairies</p>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="../src/caniuse-embed.min.js"></script>
+        <script src="../src/reveal.js/lib/js/head.min.js"></script>
+        <script src="../src/reveal.js/js/reveal.js"></script>
+
+        <!-- Code steps start -->
+        <script src="../src/code-steps/prism.js" data-manual></script>
+        <!-- Code steps end -->
+
+        <script type="module" src="../src/custom/script-module.js"></script>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+{
+    // Place your snippets for php here. Each snippet is defined under a snippet name and has a prefix, body and
+    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+    // same ids are connected.
+    // Example:
+    "printr":
+    {
+        "prefix": "printr",
+        "body":
+        [
+            "echo '<pre>';",
+            "print_r($1);",
+            "echo '</pre>';"
+        ],
+        "description": ""
+    },
+    "vardump":
+    {
+        "prefix": "vardump",
+        "body":
+        [
+            "echo '<pre>';",
+            "var_dump($1);",
+            "echo '</pre>';"
+        ],
+        "description": ""
+    },
+    "printre":
+    {
+        "prefix": "printre",
+        "body":
+        [
+            "echo '<pre>';",
+            "print_r($1);",
+            "echo '</pre>';",
+            "exit;"
+        ],
+        "description": ""
+    },
+    "vardumpe":
+    {
+        "prefix": "vardumpe",
+        "body":
+        [
+            "echo '<pre>';",
+            "var_dump($1);",
+            "echo '</pre>';",
+            "exit;"
+        ],
+        "description": ""
+    }
+}

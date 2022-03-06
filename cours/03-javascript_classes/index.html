@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Cours 03 - JavaScript Classes</title>
+        <meta name="description" content="">
+        <meta name="author" content="Bruno Simon">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="../src/reveal.js/css/reveal.css">
+        <link rel="stylesheet" href="../src/reveal.js/css/theme/orange.css" id="theme">
+        <!-- <link rel="stylesheet" href="../src/reveal.js/lib/css/highlight/railscasts.css"> -->
+        <link rel="stylesheet" href="../src/reveal.js/lib/css/highlight/github.css">
+        <link rel="stylesheet" href="../src/custom/style.css">
+        <script>
+            document.write( '<link rel="stylesheet" href="../src/reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!--[if lt IE 9]>
+            <script src="../src/reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <!-- Code steps start -->
+        <link rel="stylesheet" href="../src/code-steps/prism-tomorrow.css">
+        <link rel="stylesheet" href="../src/code-steps/style.css">
+        <!-- Code steps end -->
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h1>Développement web</h1>
+                    <h3>Cours 03</h3>
+                    <ul>
+                        <li>site : <a target="_blank" href="http://bruno-simon.com/esin/e2-p2025/">http://bruno-simon.com/esin/e2-p2025/</a></li>
+                        <li>contact : <a target="_blank" href="mailto:bruno.simon1@exterieur.groupe-igs.fr">bruno.simon1@exterieur.groupe-igs.fr</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>JavaScript Classes</h1>
+                </section>
+
+                <section>
+                    <p>Maintenant que nous savons comment importer et exporter du code, que devons nous exporter exactement ?</p>
+                </section>
+
+                <section>
+                    <p>Nous allons exporter des classes qui vont nous permettre de faire du code orienté objet</p>
+                    <p>On parle de <span class="u">OOP</span></p>
+                    <p><span class="u">O</span>bject <span class="u">O</span>riented <span class="u">P</span>rogrammation</p>
+                </section>
+
+                <section>
+                    <h2>Créer une classe</h2>
+                </section>
+                
+                <section>
+                    <p>Pour créer une classe, nous pouvons utiliser le code suivant</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class HelloClass {}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Rien ne va se produire car nous n'utilisons pas la classe</p>
+                    <p>☝️ Même si nous utilisons des accolades, il ne s'agit pas d'un objet</p>
+                </section>
+
+                <section>
+                    <p>Par convention, nous nommons les classes en <span class="hl fragment">PascalCase</span></p>
+                </section>
+
+                <section>
+                    <h2>Instancier une classe</h2>
+                </section>
+
+                <section>
+                    <p>Une classe est comme un schéma (blueprint)</p>
+                    <p>Nous pouvons l'utiliser pour créer plusieurs objets</p>
+                </section>
+
+                <section>
+                    <p>Imaginons que notre classe est un blueprint qui permet de créer des robots</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class Robot {}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Nous pouvons ensuite créer un robot à partir de cette classe</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+const robot = new Robot()
+console.log(robot)
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>La variable <span class="hl">robot</span> est ce qu'on appelle une <span class="u">instance</span> de la classe <span class="hl">Robot</span></p>
+                </section>
+
+                <section>
+                    <p>Et nous pouvons donc créer plusieurs robots à partir de cette classe</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class Robot {}
+
+const wallE = new Robot()
+const ultron = new Robot()
+const astroBoy = new Robot()
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Méthodes</h2>
+                </section>
+
+                <section>
+                    <p>C'est un bon début, mais nos robots ne peuvent rien faire</p>
+                </section>
+
+                <section>
+                    <p>Il est possible d'ajouter des fonctions à la classe</p>
+                </section>
+
+                <section>
+                    <p>Et nous pouvons donc créer plusieurs robots à partir de cette classe</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class Robot
+{
+    sayHi()
+    {
+        console.log('Hello!')
+    }
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Et tous les robots auront accès à cette fonction</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+ultron.sayHi()
+astroBoy.sayHi()
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>☝️</p>
+                    <p>Les fonctions dans les classes sont appelées <span class="u">méthodes</span></p>
+                </section>
+
+                <section>
+                    <h2>Constructeur</h2>
+                </section>
+
+                <section>
+                    <p>Et si nous forcions nos robots à remercier leur créateur lorsqu'ils sont construits</p>
+                    <p>Pour cela, nous pouvons ajouter une méthodes nommée <span class="hl">constructor</span></p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class Robot
+{
+    constructor()
+    {
+        console.log('Thank you creator')
+    }
+
+    sayHi()
+    {
+        console.log('Hello!')
+    }
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Il est possible d'ajouter des paramètres à cette classes</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class Robot
+{
+    constructor(name)
+    {
+        console.log(`I am ${name}. Thank you creator`)
+    }
+
+    sayHi()
+    {
+        console.log('Hello!')
+    }
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Et d'envoyer les données lors de l'instanciation</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+const wallE = new Robot('Wall-E')
+const ultron = new Robot('Ultron')
+const astroBoy = new Robot('Astro Boy')
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Context</h2>
+                </section>
+
+                <section>
+                    <p>Et si nous aimerions que le robot fournisse son nom lorsqu'il dit "bonjour"</p>
+                    <p>Nous ne voulons pas avoir à fournir le nom à chaque fois que l'on appelle la fonction <span class="hl">sayHi</span></p>
+                </section>
+
+                <section>
+                    <p>Comme nous fournissons le nom dans le constructor, nous allons faire en sorte de le sauvegarder au sein de l'instance</p>
+                    <p>Pour cela, nous allons utiliser le mot clé <span class="hl">this</span></p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class Robot
+{
+    constructor(name)
+    {
+        this.name = name
+
+        console.log(`I am ${this.name}. Thank you creator`)
+    }
+
+    sayHi()
+    {
+        console.log('Hello!')
+    }
+}
+                        </code></pre>
+                    </div>
+                </section>
+                
+                <section>
+                    <p><span class="hl">this</span> est ce qu'on appelle le <span class="u">context</span></p>
+                    <p>Le context correspond à l'instance et est particulier à chaque instance même si le code est le même dans la classe</p>
+                </section>
+
+                <section>
+                    <p>☝️</p>
+                    <p><span class="hl">name</span> est ce qu'on appelle une propriété de la classe</p>
+                </section>
+
+                <section>
+                    <p>Nous pouvons ajouter d'autres propriétés</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class Robot
+{
+    constructor(name, legs)
+    {
+        this.name = name
+        this.legs = legs
+
+        console.log(`I am ${this.name}. Thank you creator`)
+    }
+
+    // ...
+}
+
+const wallE = new Robot('Wall-E', 0)
+const ultron = new Robot('Ultron', 2)
+const astroBoy = new Robot('Astro Boy', 2)
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Et nous pouvons y accéder depuis l'extérieur de la classe</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+console.log(wallE.legs)
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Les méthodes sont aussi accessibles depuis le context</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class Robot
+{
+    constructor(name, legs)
+    {
+        this.name = name
+        this.legs = legs
+
+        this.sayHi()
+
+        console.log(`I am ${this.name}. Thank you creator`)
+    }
+
+    // ...
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Héritage</h2>
+                </section>
+
+                <section>
+                    <p>L'héritage revient à créer une classe basée sur une autre classe</p>
+                    <p>Nous créons un blueprint à partir d'un autre blueprint</p>
+                    <p>Toutes les méthodes de la classe de base seront disponibles dans la nouvelle classe</p>
+                </section>
+
+                <section>
+                    <p>Pour illustrer cela, nous allons créer une classe de robots volants basée sur la classe de robots</p>
+                </section>
+
+                <section>
+                    <p>Créez une classe <span class="hl">FlyingRobot</span> basée sur la classe <span class="hl">Robot</span> avec le mot clé <span class="hl">extends</span></p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class FlyingRobot extends Robot
+{
+    
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Nous pouvons maintenant l'utiliser sur les robots qui volent</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+const wallE = new Robot('Wall-E', 0)
+const ultron = new FlyingRobot('Ultron', 2)
+const astroBoy = new FlyingRobot('Astro Boy', 2)
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Actuellement, la classe <span class="hl">FlyingRobot</span> n'apporte rien de plus que <span class="hl">Robot</span>, mais nous pouvons ajouter de nouvelles méthodes</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class FlyingRobot extends Robot
+{
+    takeOff()
+    {
+        console.log(`Have a good flight ${this.name}`)
+    }
+
+    land()
+    {
+        console.log(`Welcome back ${this.name}`)
+    }
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Les robots instanciés depuis <span class="hl">FlyingRobot</span> peuvent maintenant décoler et atterir</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+astroBoy.sayHi()
+astroBoy.takeOff()
+astroBoy.land()
+                        </code></pre>
+                    </div>
+                    <p>Et ils peuvent toujours dire bonjour</p>
+                </section>
+
+                <section>
+                    <p>Si nous utilisons le même nom de méthode, cela aura pour effet de l'écraser</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class FlyingRobot extends Robot
+{
+    sayHi()
+    {
+        console.log(`Hello! My name is ${this.name} and I am a flying robot`)
+    }
+
+    // ...
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Mais il est aussi possible d'appeler la méthode de la classe de base avec le mot clé <span class="hl">super</span></p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class FlyingRobot extends Robot
+{
+    sayHi()
+    {
+        super.sayHi()
+        console.log('and I am a flying robot')
+    }
+
+    // ...
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Cela fonctionne aussi avec la méthode <span class="hl">constructor</span> sauf qu'il faut appeler <span class="hl">super()</span> sans préciser de méthode</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+class FlyingRobot extends Robot
+{
+    constructor(name, legs)
+    {
+        super(name, legs)
+
+        this.canFly = true
+    }
+
+    // ...
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>☝️</p>
+                    <p>En réalité, nous sommes obligés d'appeler <span class="hl">super()</span> dans le <span class="hl">constructor</span> d'une classe héritée</p>
+                </section>
+
+                <section>
+                    <h2>Modules</h2>
+                </section>
+
+                <section>
+                    <p>Nous pouvons utiliser les modules pour exporter nos classes</p>
+                </section>
+
+                <section>
+                    <p>Créez un fichier <span class="hl">src/Robot.js</span> qui export la classe <span class="hl">Robot</span></p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+export default class Robot
+{
+    constructor(name, legs)
+    {
+        this.name = name
+        this.legs = legs
+
+        console.log(`I am ${this.name}. Thank you creator`)
+
+        this.sayHi()
+    }
+
+    sayHi()
+    {
+        console.log(`Hello! My name is ${this.name}`)
+    }
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Créez un fichier <span class="hl">src/FlyingRobot.js</span> qui export la classe <span class="hl">FlyingRobot</span></p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+export default class FlyingRobot extends Robot
+{
+    constructor(name, legs)
+    {
+        super(name, legs)
+
+        this.canFly = true
+    }
+
+    sayHi()
+    {
+        console.log(`Hello! My name is ${this.name} and I'm a flying robot`)
+    }
+
+    takeOff()
+    {
+        console.log(`Have a good flight ${this.name}`)
+    }
+
+    land()
+    {
+        console.log(`Welcome back ${this.name}`)
+    }
+}
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>⚠️</p>
+                    <p>Il ne faut pas oublier d'importer la classe <span class="hl">Robot</span> dans le fichier <span class="hl">src/FlyingRobot.js</span></p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+import Robot from './Robot.js'
+
+export default class FlyingRobot extends Robot
+{
+    // ...
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Dans <span class="hl">src/index.js</span>, nous pouvons maintenant importer et utiliser nos classes</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+import Robot from './Robot.js'
+import FlyingRobot from './FlyingRobot.js'
+
+const wallE = new Robot('Wall-E', 0)
+const ultron = new FlyingRobot('Ultron', 2)
+const astroBoy = new FlyingRobot('Astro Boy', 2)
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                </section>
+
+                <section>
+                    <p>Les classes peuvent sembler difficiles, mais elles rendent le code beaucoup plus maintenable et réutilisable</p>
+                    <p>Il n'est pas rare de voir des applications 100% orientées objet</p>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="../src/caniuse-embed.min.js"></script>
+        <script src="../src/reveal.js/lib/js/head.min.js"></script>
+        <script src="../src/reveal.js/js/reveal.js"></script>
+
+        <!-- Code steps start -->
+        <script src="../src/code-steps/prism.js" data-manual></script>
+        <!-- Code steps end -->
+
+        <script type="module" src="../src/custom/script-module.js"></script>
+    </body>
+</html>
