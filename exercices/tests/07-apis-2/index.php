@@ -3,8 +3,8 @@
     include './includes/config.php';
 
     $city = empty($_GET['city']) ? 'Paris' : $_GET['city'];
-
     $url = 'http://api.openweathermap.org/data/2.5/weather?q=' . $city . '&appid=02ab42f7ed9d4378474ce2d45b4473db&units=metric';
+
     $jsonResult = apiCall($url);
 
     $staticMapUrl = 'https://maps.googleapis.com/maps/api/staticmap?';
