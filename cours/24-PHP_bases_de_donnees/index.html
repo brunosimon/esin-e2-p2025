@@ -395,28 +395,43 @@ DELETE FROM users
                     
                     <div class="code-steps" data-type="php" data-trim>
                         <pre contenteditable><code>
-$pdo = new PDO('mysql:host=localhost;dbname=hetic_p2023_first;port=8889', 'root', 'root');
+$pdo = new PDO(
+    'mysql:host=localhost;dbname=esin_p2025_first;port=3306',
+    'root',
+    ''
+);
                         </code></pre>
                     </div>
                 </section>
 
                 <section>
-                    <p>
-                        <small style="white-space: nowrap;">
-                            $pdo = new PDO('mysql:host=<span class="u">localhost</span>;dbname=<span class="u">hetic_p2023_first</span>;port=<span class="u">8889</span>', '<span class="u">root</span>', '<span class="u">root</span>');
-                        </small>
-                    </p>
-                    <ul>
-                        <li><span class="u">localhost</span> : Serveur (en général localhost, parfois une IP)</li>
-                        <li><span class="u">hetic_p2023_first</span> : Nom de la table</li>
-                        <li><span class="u">8889</span> : Port</li>
-                        <li><span class="u">root</span> : Login</li>
-                        <li><span class="u">root</span> : Mot de passe (root ou rien)</li>
-                    </ul>
-                    <p>☝️ La majorité de ces informations peuvent être trouvées en ouvrant la BDD dans PhpMyAdmin</p>
-                    <p>
-                        <img src="src/img/pdo-infos.png" width="400">
-                    </p>
+                    <table>
+                        <tr>
+                            <td>Serveur</td>
+                            <td>localhost</td>
+                            <td>Parfois une IP</td>
+                        </tr>
+                        <tr>
+                            <td>Nom de la table</td>
+                            <td>esin_p2025_first</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Port</td>
+                            <td>3306</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Login</td>
+                            <td>'root'</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Mot de passe</td>
+                            <td>''</td>
+                            <td>root ou rien</td>
+                        </tr>
+                    </table>
                 </section>
 
                 <!-- <section id="pdo">
@@ -427,7 +442,7 @@ $pdo = new PDO('mysql:host=localhost;dbname=hetic_p2023_first;port=8889', 'root'
                         <pre contenteditable><code>
 try
 {
-    $pdo = new PDO('mysql:dbname=hetic_p2023_first;host=localhost;port=8889', 'root', 'root');
+    $pdo = new PDO('mysql:dbname=esin_p2025_first;host=localhost;port=3306', 'root', 'root');
 }
 catch(PDOException $e)
 {
@@ -447,12 +462,16 @@ catch(PDOException $e)
                     <div class="code-steps" data-type="php" data-trim>
                         <pre contenteditable><code>// Connexion variables
 define('DB_HOST', 'localhost');
-define('DB_PORT', '8889');
-define('DB_NAME', 'hetic_p2023_first');
+define('DB_PORT', '3306');
+define('DB_NAME', 'esin_p2025_first');
 define('DB_USER', 'root');
-define('DB_PASS', 'root');
+define('DB_PASS', '');
 
-$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';port='.DB_PORT, DB_USER, DB_PASS);
+$pdo = new PDO(
+    'mysql:host='.DB_HOST.';dbname='.DB_NAME.';port='.DB_PORT,
+    DB_USER,
+    DB_PASS
+);
 
 // Delete next line if working
 echo 'Connected';
@@ -594,11 +613,15 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 // Database
 define('DB_HOST', 'localhost');
 define('DB_PORT', '8889');
-define('DB_NAME', 'hetic_p2023_first');
+define('DB_NAME', 'esin_p2025_first');
 define('DB_USER', 'root');
-define('DB_PASS', 'root');
+define('DB_PASS', '');
 
-$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';port='.DB_PORT, DB_USER, DB_PASS);
+$pdo = new PDO(
+    'mysql:host='.DB_HOST.';dbname='.DB_NAME.';port='.DB_PORT,
+    DB_USER,
+    DB_PASS
+);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
                         </code></pre>
