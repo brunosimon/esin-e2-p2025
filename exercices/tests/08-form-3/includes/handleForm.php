@@ -75,6 +75,8 @@ if(!empty($_POST))
     // Success
     if(empty($errorMessages))
     {
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
         // Insert into DB
         $prepare = $pdo->prepare('
             INSERT INTO

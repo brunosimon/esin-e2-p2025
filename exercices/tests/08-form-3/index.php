@@ -3,15 +3,16 @@
     require_once './includes/config.php';
     require_once './includes/handleForm.php';
 
-    $query = $pdo->query('SELECT id, login, age, gender FROM users ORDER BY id DESC');
-    $users = $query->fetchAll();
-
     if(!empty($_GET['delete']))
     {
         $prepare = $pdo->prepare('DELETE FROM users WHERE id = :id');
         $prepare->bindValue('id', (int)$_GET['delete']);
         $prepare->execute();
     }
+
+    $query = $pdo->query('SELECT id, login, age, gender FROM users ORDER BY id DESC');
+    $users = $query->fetchAll();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

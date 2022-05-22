@@ -115,20 +115,19 @@ session_start();
 
 // Connexion variables
 define('DB_HOST', 'localhost');
-define('DB_PORT', '8889');
-define('DB_NAME', 'hetic_p2022_passwords');
+define('DB_PORT', '3306');
+define('DB_NAME', 'esin_p2025_passwords');
 define('DB_USER', 'root');
-define('DB_PASS', 'root');
+define('DB_PASS', '');
 
-try
-{
-    $pdo = new PDO('mysql:dbname='.DB_NAME.';host='.DB_HOST.';port='.DB_PORT, DB_USER, DB_PASS);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-}
-catch(PDOException $e)
-{
-    die('Couldn\'t connect');
-}
+$pdo = new PDO(
+    'mysql:host='.DB_HOST.';dbname='.DB_NAME.';port='.DB_PORT,
+    DB_USER,
+    DB_PASS
+);
+
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
                         </code></pre>
                     </div>
                 </section>
@@ -528,7 +527,7 @@ define('SALT', '76t!"ed#');
                         <pre contenteditable><code>
 // ...
 
-$password = hash('sha256', SALT.$_POST['password']); // Hash + salt
+$password = hash('sha256', SALT . $_POST['password']); // Hash + salt
 
 // ...
                         </code></pre>
@@ -543,7 +542,7 @@ $password = hash('sha256', SALT.$_POST['password']); // Hash + salt
                         <pre contenteditable><code>
 // ...
 
-$password = hash('sha256', SALT.$_POST['password']); // Hash + salt
+$password = hash('sha256', SALT . $_POST['password']); // Hash + salt
 
 // ...
                         </code></pre>
@@ -572,7 +571,7 @@ $password = hash('sha256', SALT.$_POST['password']); // Hash + salt
                         <pre contenteditable><code>
 // ...
 
-$salt = hash('md5', $email.SALT);
+$salt = hash('md5', $email . SALT);
 $password = hash('sha256', $salt.$_POST['password']);
 
 // ...
